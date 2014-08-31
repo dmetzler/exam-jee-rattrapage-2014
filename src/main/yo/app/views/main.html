@@ -1,0 +1,17 @@
+<div class="header">
+
+	<h3 class="text-muted">Tennis score counter</h3>
+</div>
+
+<div class="jumbotron">
+	<div ng-show="error.length" class="alert alert-danger" role="alert">
+		<ul>
+			<li ng-repeat="e in error">{{e}}</li>
+		</ul>
+	</div>
+	<h1>{{score}}</h1>
+	<p><a class="btn btn-lg btn-success" ng-click="scoreP1()">Player 1</a> <a class="btn btn-lg btn-success" ng-click="scoreP2()">Player 2</a> <a class="btn btn-lg btn-danger" ng-click="reset()">Reset score</a></p>
+</div>
+
+</div>
+
