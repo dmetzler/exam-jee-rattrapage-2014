@@ -1,5 +1,7 @@
 package org.isen.jee.tennis;
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +21,7 @@ public class TennisCounterTest {
      */
     @Test
     public void itCanInitiateAGame() throws Exception {
+        assertEquals("0 partout", game.getScore());
 
     }
 
@@ -30,7 +33,8 @@ public class TennisCounterTest {
      */
     @Test
     public void aPlayerMayScore() throws Exception {
-
+        play(1, 0);
+        assertEquals("15-0", game.getScore());
     }
 
     /**
@@ -41,7 +45,8 @@ public class TennisCounterTest {
      */
     @Test
     public void bothPlayerMayScore() throws Exception {
-
+        play(1, 2);
+        assertEquals("15-30", game.getScore());
     }
 
     /**
@@ -51,7 +56,8 @@ public class TennisCounterTest {
      */
     @Test
     public void aPlayerMayWinTheGame() throws Exception {
-
+        play(4, 0);
+        assertEquals("Nadal gagne le jeu", game.getScore());
     }
 
     /**
@@ -62,7 +68,8 @@ public class TennisCounterTest {
      */
     @Test
     public void playerMayBeAtEquality() throws Exception {
-
+        play(1, 1);
+        assertEquals("15 partout", game.getScore());
     }
 
     /**
@@ -73,6 +80,9 @@ public class TennisCounterTest {
      */
     @Test
     public void testDeuceScore() throws Exception {
+        play(3, 3);
+
+        assertEquals("Egalité", game.getScore());
     }
 
     /**
@@ -82,6 +92,8 @@ public class TennisCounterTest {
      */
     @Test
     public void player1MayHaveAdvantage() throws Exception {
+        play(4, 3);
+        assertEquals("Avantage Nadal", game.getScore());
     }
 
     /**
@@ -91,6 +103,8 @@ public class TennisCounterTest {
      */
     @Test
     public void player2MayHaveAdvantage() throws Exception {
+        play(3, 4);
+        assertEquals("Avantage Djokovic", game.getScore());
     }
 
     /**
@@ -100,7 +114,8 @@ public class TennisCounterTest {
      */
     @Test
     public void player1WinsAfterAdvantage() throws Exception {
-
+        play(5, 3);
+        assertEquals("Nadal gagne le jeu", game.getScore());
     }
 
     /**
@@ -110,6 +125,20 @@ public class TennisCounterTest {
      */
     @Test
     public void player2WinsAfterAdvantage() throws Exception {
+        play(3, 5);
+        assertEquals("Djokovic gagne le jeu", game.getScore());
+    }
+
+    private void play(int player1Wins, int player2Wins) {
+        for (int i = 0; i < Math.max(player1Wins, player2Wins); i++) {
+
+            if (i < player1Wins) {
+                game.player1Scores();
+            }
+            if (i < player2Wins) {
+                game.player2Scores();
+            }
+        }
     }
 
 }
